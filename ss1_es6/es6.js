@@ -64,6 +64,8 @@ let addedCourses = [
   }
 ];
 
-const newCourses = [...courses, ...addedCourses];
-console.log(newCourses);
+const newCourses = (course, added) => {
+  return [...course, ...added]
+};
+console.log(newCourses(courses, addedCourses));
 
