@@ -7,7 +7,7 @@ class StudentComponent extends React.Component {
 
     render() {
         return (
-            <tr>
+            <tr key={this.props.student.id}>
                 <td>{this.props.student.id}</td>
                 <td>{this.props.student.name}</td>
                 <td>{this.props.student.age}</td>
