@@ -16,10 +16,10 @@ class TodoApp extends React.Component {
                 <button onClick={this.handleAddItem}>Add</button>
                 {
                     this.state.list.length > 0 ?
-                        this.state.list.map(
-                            todo => (
+                        this.state.list.map( 
+                            (todo, index) => (
                                 <ul>
-                                    <li key={this.state.item}>
+                                    <li key={index}>
                                         {todo}
                                     </li>
                                 </ul>
