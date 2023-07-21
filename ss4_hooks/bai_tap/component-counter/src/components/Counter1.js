@@ -1,16 +1,13 @@
-import { useState } from 'react';
+import useCounter from '../hooks/useCounter';
 
-function Counter1() {
-    const [counter1, setCounter1] = useState(0);
+export default function Counter1() {
+    const [counter1, setCounter1] = useCounter(1);
 
     return (
         <>
             <h5>Count: {counter1}</h5>
-            <button onClick={() => {
-                setCounter1((previousCounter) => previousCounter + 1);
-            }}>Add 1</button>
+            <button onClick={setCounter1}>Add 1</button>
         </>
     )
 }
 
-export default Counter1;
