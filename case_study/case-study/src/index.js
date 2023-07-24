@@ -5,17 +5,21 @@ import reportWebVitals from './reportWebVitals';
 import Header from './components/header';
 import Footer from './components/footer';
 import Body from './components/body';
-import './AllTable.css';
 import AddNewService from './components/addService';
+import AllCustomer from './components/allCustomer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
+  <BrowserRouter>
     <Header />
-    <Body />
+    <Routes>
+      <Route path='/furama' element={<Body />}></Route>
+      <Route path='/furama/customers' element={<AllCustomer />} ></Route>
+      <Route path='/furama/services/create' element={<AddNewService />} ></Route>
+    </Routes>
     <Footer />
-    <AddNewService />
-  </>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
