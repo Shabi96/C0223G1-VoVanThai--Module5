@@ -6,6 +6,12 @@ export default function UserList() {
     const dispatch = useDispatch();
     const users = useSelector(state => state.userReducer.users);
 
+    function deleteUserById(id) {
+        if (window.confirm("Are you sure delete user by id: " + id)) {
+            dispatch(deleteUser(id));
+        }
+    }
+
     return (
         <>
             <h1>User List</h1>
@@ -30,7 +36,7 @@ export default function UserList() {
                                     <td>{user.email}</td>
                                     <td>{user.website}</td>
                                     <td>
-                                        <button onClick={() => dispatch(deleteUser(user.id))}>Delete User</button>
+                                        <button onClick={() => deleteUserById(user.id)}>Delete User</button>
                                     </td>
                                 </tr>
                             )
