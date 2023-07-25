@@ -6,18 +6,27 @@ import * as yup from 'yup';
 export default function TodoList() {
     const [todoList, setTodoList] = useState([]);
 
-    useEffect(() => {
-        const getTodoLists = async () => {
-            try {
+    const getTodoLists = async () => {
+        try {
             const data = await getTodoList();
             console.log(data);
             setTodoList(data);
-            } catch {
-                alert("Error!!!!")
-            }
+        } catch {
+            alert("Error!!!!")
         }
-        getTodoLists();
-    }, [])
+    }
+
+    useEffect(() => {getTodoLists()}, [])
+
+    function submitValues(values) {
+        const createTodoList = async () => {
+            await create(values);
+            const newTodoList = await getTodoList();
+            setTodoList(newTodoList);
+        }
+        createTodoList();
+        alert("Submit success!!!!");
+    }
 
     return (
         <div className='container'>
@@ -28,13 +37,7 @@ export default function TodoList() {
                     name: yup.string().required()
                 })}
                 onSubmit={(values) => {
-                    const createTodoList = async () => {
-                        await create(values);
-                        const newTodoList = await getTodoList();
-                        setTodoList(newTodoList);
-                    }
-                    createTodoList();
-                    alert("Submit success!!!!");
+                    submitValues(values);
                 }}>
                 <Form>
                     <Field id='name' type='text' name='name' className='form-control' />

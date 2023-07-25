@@ -1,35 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { getAllBooks, deleteBook } from '../service/bookService';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function BookList() {
     const [bookList, setBookList] = useState([]);
 
-    useEffect(() => {
-        const getBookList = async () => {
-            try {
-                const data = await getAllBooks();
-                console.log(data);
-                setBookList(data);
-            } catch (error) {
-                console.log("Error!!!!");
-            }
+    const getBookList = async () => {
+        try {
+            const data = await getAllBooks();
+            console.log(data);
+            setBookList(data);
+        } catch (error) {
+            console.log("Error!!!!");
         }
-        getBookList();
-    }, []);
+    }
+    useEffect(() => { getBookList() }, []);
 
     function deleteById(id) {
-        console.log(id);
-        deleteBook(id).then(() => {
-            getAllBooks().then((data) => {
-                setBookList(data);
-            })
-        }
-        ).catch(
-            () => {
-                alert("Error!!!!")
+        if (window.confirm("Are you sure delete book by id: " + id)) {
+            deleteBook(id).then(() => {
+                getAllBooks().then((data) => {
+                    setBookList(data);
+                })
             }
-        )
+            )
+        }
     }
 
     return (

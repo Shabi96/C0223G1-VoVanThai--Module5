@@ -10,21 +10,17 @@ export default function EditBook() {
     const [book, setBook] = useState({});
     const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log(params.id);
-        const books = async () => {
-            try {
-                getById(params.id).then((res) => {
-                    setBook(res);
-                }
-                );
-            } catch {
-                console.log("Error!!!!");
+    const books = async () => {
+        try {
+            getById(params.id).then((res) => {
+                setBook(res);
             }
+            );
+        } catch {
+            console.log("Error!!!!");
         }
-        books();
-        console.log(book);
-    }, [])
+    }
+    useEffect(() => {books()}, [params.id])
 
     return (
         <>
