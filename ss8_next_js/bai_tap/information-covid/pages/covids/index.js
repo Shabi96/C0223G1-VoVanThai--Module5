@@ -1,5 +1,5 @@
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
+import { getAll } from "../services/CovidService";
 
 export default function CovidPage(props) {
     console.log(props.data);
@@ -37,11 +37,10 @@ export default function CovidPage(props) {
 }
 
 export async function getStaticProps() {
-    const res = await axios.get('http://localhost:8080/covids');
-    console.log(res.data)
+    const res = await getAll();
     return {
         props: {
-            data: res.data
+            data: res
         }
     }
 }
