@@ -3,7 +3,7 @@ export default function Header() {
         <>
             {/*[if lte IE 9]>
         <![endif]*/}
-            <p className="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+            {/* <p className="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p> */}
             <header>
                 <div className="header-area ">
                     <div id="sticky-header" className="main-header-area">
@@ -60,7 +60,7 @@ export default function Header() {
                                             </ul>
                                         </div>
                                         <div className="book_btn d-none d-lg-block">
-                                            <a className="popup-with-form" href="#test-form">Book A Room</a>
+                                            {/* <a className="popup-with-form" href="#test-form">Book A Room</a> */}
                                         </div>
                                     </div>
                                 </div>

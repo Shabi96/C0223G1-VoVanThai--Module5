@@ -29,24 +29,24 @@
         .logo-img{
             text-align: center;
             @media #{$mobile_device} {
-                // padding-left: 20px;
+                padding-left: 20px;
                 text-align: left;
             }
             @media #{$tablet_device} {
-                // padding-left: 20px;
+                padding-left: 20px;
                 text-align: left;
             }
             @media #{$mid_device} {
-                // padding-left: 20px;
+                padding-left: 20px;
                 text-align: left;
             }
             img{
                 @media #{$mobile_device} {
-                    // padding-left: 20px;
+                    padding-left: 20px;
                     width: 70px;
                 }
                 @media #{$tablet_device} {
-                    // padding-left: 20px;
+                    padding-left: 20px;
                     width: 70px;
                 }
                

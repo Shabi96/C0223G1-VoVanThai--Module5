@@ -1,4 +1,34 @@
+import { useEffect, useState } from "react"
+import { getAllServices } from "../services/FalacityService";
+import { Link, useNavigate } from "react-router-dom";
+
+
+
 export default function AllService() {
+    const [services, setServices] = useState([]);
+    const navigate = useNavigate();
+
+    const getAll = async () => {
+        const data = await getAllServices();
+        setServices(data);
+    }
+
+    const editByType = (idService, type) => {
+        const types = JSON.parse(type);
+        console.log(idService);
+        console.log(types);
+        if (types.name == 'Villa') {
+            navigate(`/furama/services/villa/${idService}`)
+        } else if (types.name == 'House') {
+            navigate(`/furama/services/house/${idService}`)
+        } else {
+            navigate(`/furama/services/room/${idService}`)
+        }   
+    }
+
+
+    useEffect(() => { getAll() }, []);
+
     return (
         <div className="container-xl">
             <div className="table-responsive">
@@ -27,106 +57,25 @@ export default function AllService() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Villa</td>
-                                <td>30</td>
-                                <td>200</td>
-                                <td>10</td>
-                                <td>
-                                    <select>
-                                        <option data-display="Adult">Hour</option>
-                                        <option value={1}>Day</option>
-                                        <option value={2}>Month</option>
-                                        <option value={3}>Year</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>House</td>
-                                <td>25</td>
-                                <td>150</td>
-                                <td>7</td>
-                                <td>
-                                    <select>
-                                        <option data-display="Adult">Hour</option>
-                                        <option value={1}>Day</option>
-                                        <option value={2}>Month</option>
-                                        <option value={3}>Year</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Room</td>
-                                <td>20</td>
-                                <td>100</td>
-                                <td>3</td>
-                                <td>
-                                    <select>
-                                        <option data-display="Adult">Hour</option>
-                                        <option value={1}>Day</option>
-                                        <option value={2}>Month</option>
-                                        <option value={3}>Year</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Villa 1</td>
-                                <td>40</td>
-                                <td>300</td>
-                                <td>15</td>
-                                <td>
-                                    <select>
-                                        <option data-display="Adult">Hour</option>
-                                        <option value={1}>Day</option>
-                                        <option value={2}>Month</option>
-                                        <option value={3}>Year</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Room 1</td>
-                                <td>15</td>
-                                <td>80</td>
-                                <td>2</td>
-                                <td>
-                                    <select>
-                                        <option data-display="Adult">Hour</option>
-                                        <option value={1}>Day</option>
-                                        <option value={2}>Month</option>
-                                        <option value={3}>Year</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                services.length > 0 &&
+                                services.map((s, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{index}</td>
+                                            <td>{s.service}</td>
+                                            <td>{s.usable_area}</td>
+                                            <td>{s.costs}</td>
+                                            <td>{s.max_people}</td>
+                                            <td>{s.typeRental.name}</td>
+                                            <td>
+                                                <span onClick={() => {editByType(s.id, JSON.stringify(s.type))}} className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></span>
+                                                <Link className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></Link>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                            }
                         </tbody>
                     </table>
                     <div className="clearfix">

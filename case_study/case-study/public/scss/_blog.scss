@@ -13,7 +13,6 @@
         @include transform_time(.5s);
         &:hover, :hover{
             background: -webkit-linear-gradient( 131deg, #009DFF 0%, #009DFF 99%);
-            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
             @include transform_time(.5s);
@@ -47,7 +46,7 @@
     }
 
     h4 {
-        //  @include transform_time(.5s);
+         @include transform_time(.5s);
         border-bottom: 1px solid #dfdfdf;
         padding-bottom: 34px;
         margin-bottom: 25px;
@@ -59,7 +58,7 @@
         font-weight: 600;
 
         &:hover {
-            // // color: $baseColor;
+            color: $baseColor;
         }
     }
 
@@ -72,10 +71,9 @@
     }
 
     .tag {
-        // color: $baseColor;
+        color: $baseColor;
         text-align: left;
         display: inline-block;
-        float: left;
         font-size: 13px;
         font-weight: 300;
         margin-right: 22px;
@@ -167,7 +165,7 @@
 
         .meta-bottom {
             p {
-                // color: $white_color;
+                color: $white_color;
             }
         }
 
@@ -183,12 +181,12 @@
     }
 
     a {
-        // color: $white_color;
+        color: $white_color;
         font-size: 20px;
         font-weight: 600;
 
         &:hover {
-            // color: $baseColor;
+            color: $baseColor;
         }
     }
 
@@ -213,12 +211,10 @@
 
 /* Latest Blog Area css
 ============================================================================================ */
-.latest_blog_area {}
 
-.latest_blog_inner {}
 
 .l_blog_item {
-    .l_blog_img {}
+   
 
     .l_blog_text {
         .date {
@@ -233,14 +229,14 @@
 
         h4 {
             font-size: 18px;
-            // color: $title-color;
+            color: $title-color;
             border-bottom: 1px solid #eeeeee;
             margin-bottom: 0px;
             padding-bottom: 20px;
             @include transform_time(.5s);
 
             &:hover {
-                // // color: $baseColor;
+                color: $baseColor;
             }
         }
 
@@ -257,7 +253,7 @@
 
 /* Causes Area css
 ============================================================================================ */
-.causes_area {}
+
 
 .causes_slider {
     .owl-dots {
@@ -276,7 +272,7 @@
             }
 
             &.active {
-                // background: $baseColor;
+                background: $baseColor;
             }
         }
     }
@@ -299,7 +295,7 @@
             span {
                 width: 70%;
                 height: 3px;
-                // background: $title-color;
+                background: $title-color;
                 position: absolute;
                 left: 0px;
                 bottom: 0px;
@@ -309,7 +305,7 @@
                     position: absolute;
                     right: -10px;
                     bottom: 0px;
-                    // background: $title-color; 
+                    background: $title-color; 
                     color: #fff;
                     padding: 0px 5px;
                 }
@@ -321,22 +317,22 @@
         padding: 30px 35px 40px 30px;
 
         h4 {
-            // color: $title-color;
-            // font-family: $rob;
+            color: $title-color;
+            font-family: $rob;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 15px;
             cursor: pointer;
 
             &:hover {
-                // // color: $title-color;
+                color: $title-color;
             }
         }
 
         p {
             font-size: 14px;
             line-height: 24px;
-            // color: $pfont;
+            color: $pfont;
             font-weight: 300;
             margin-bottom: 0px;
         }
@@ -349,9 +345,9 @@
             text-align: center;
             float: left;
             line-height: 50px;
-            // background: $title-color;
+            background: $title-color;
             color: #fff;
-            // font-family: $rob;
+            font-family: $rob;
             font-size: 14px;
             font-weight: 500;
 
@@ -359,7 +355,7 @@
                 border-color: #eeeeee;
                 background: #fff;
                 font-size: 14px;
-                // color: $title-color;
+                color: $title-color;
             }
         }
     }
@@ -395,7 +391,7 @@
             transition: all 0.3s linear;
 
             &:hover {
-                // color: $pfont;
+                color: $pfont;
             }
         }
     }
@@ -423,9 +419,9 @@
         padding: 1px 18px;
         text-align: center;
 
-        // color: $title-color;
+        color: $title-color;
         &:before {
-            // background: $title-color;
+            background: $title-color;
         }
 
         &+.tag_btn {
@@ -438,7 +434,7 @@
 .blog_categorie_area {
     padding-top: 30px;
     padding-bottom: 30px;
-    // background: $lightGray;
+    background: $lightGray;
 
     @media(min-width: 900px) {
         padding-top: 80px;
@@ -480,15 +476,15 @@
             text-transform: uppercase;
             color: #fff;
             position: relative;
-            //          &:before{
-            //              content: "";
-            //              height: 1px;
-            //              width: 100%;
-            //              background: #fff;
-            //              position: absolute;
-            //              bottom: 0px;
-            //              left: 0px;
-            //          }
+                     &:before{
+                         content: "";
+                         height: 1px;
+                         width: 100%;
+                         background: #fff;
+                         position: absolute;
+                         bottom: 0px;
+                         left: 0px;
+                     }
         }
 
         p {
@@ -517,10 +513,10 @@
 
 /*============ blog_left_sidebar css ==============*/
 .blog_area {
-    // background: $lightGray;
+    background: $lightGray;
 }
 
-.blog_left_sidebar {}
+
 
 .blog_item {
     margin-bottom: 50px;
@@ -777,9 +773,9 @@
 
                 &:hover {
 
-                    // border-// color: $title-color;
+                    border-color: $title-color;
                     a {
-                        // // color: $baseColor;
+                        color: $baseColor;
                     }
                 }
             }
@@ -1008,8 +1004,8 @@
     }
 
     &:hover {
-        // background-color: $baseColor;
-        // color: $white_color;
+        background-color: $baseColor;
+        color: $white_color;
     }
 }
 
@@ -1065,7 +1061,7 @@
                 transition: all 0.2s linear;
 
                 &:hover {
-                    // color: $title-color;
+                    color: $title-color;
                 }
             }
         }
@@ -1080,7 +1076,7 @@
         }
 
         h2 {
-            // color: $title-color;
+            color: $title-color;
         }
     }
 
@@ -1171,7 +1167,7 @@
 
                     i,
                     span {
-                        // // color: $baseColor;
+                        color: $baseColor;
                     }
                 }
             }
@@ -1323,9 +1319,9 @@
     }
 
     h4 {
-        // text-align: center;
+        text-align: center;
         margin-bottom: 35px;
-        // color: $title-color;
+        color: $title-color;
         font-size: 18px;
     }
 
@@ -1335,7 +1331,7 @@
     }
 
     a {
-        // color: $title-color;
+        color: $title-color;
     }
 
     .comment-list {

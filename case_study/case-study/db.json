@@ -1,0 +1,123 @@
+{
+  "services": [
+    {
+      "service": "3",
+      "costs": 3,
+      "max_people": 3,
+      "usable_area": 399997,
+      "type": {
+        "id": 1,
+        "name": "Villa"
+      },
+      "typeRental": {
+        "id": 4,
+        "name": "Year"
+      },
+      "standard": "3",
+      "description": "a",
+      "pool": 3,
+      "floor": 3,
+      "free": "",
+      "image": "a",
+      "id": 1
+    },
+    {
+      "service": "3",
+      "costs": 2,
+      "max_people": 3,
+      "usable_area": 3,
+      "type": {
+        "id": 2,
+        "name": "House"
+      },
+      "standard": "3",
+      "description": "3",
+      "pool": 3,
+      "floor": 3,
+      "free": "",
+      "image": "3",
+      "typeRental": {
+        "id": 4,
+        "name": "Year"
+      },
+      "id": 2
+    },
+    {
+      "service": "3",
+      "costs": 3,
+      "max_people": 3,
+      "usable_area": 3,
+      "type": {
+        "id": 3,
+        "name": "Room"
+      },
+      "standard": "",
+      "description": "",
+      "pool": "",
+      "floor": "",
+      "free": "3",
+      "image": "3",
+      "typeRental": {
+        "id": 1,
+        "name": "Hour"
+      },
+      "id": 3
+    }
+  ],
+  "rental-types": [
+    {
+      "id": 1,
+      "name": "Hour"
+    },
+    {
+      "id": 2,
+      "name": "Day"
+    },
+    {
+      "id": 3,
+      "name": "Month"
+    },
+    {
+      "id": 4,
+      "name": "Year"
+    }
+  ],
+  "customers": [
+    {
+      "name": "ddd",
+      "gender": "Male",
+      "date_of_birth": "2023-07-07",
+      "email": "shabisk55@gmail.com",
+      "id_card": "1234567892",
+      "phone_number": "1111111111",
+      "address": "11111",
+      "customer_type": {
+        "id": 1,
+        "name": "Diamond"
+      },
+      "id": 1
+    }
+  ],
+  "customer-types": [
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Platinum"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ]
+}

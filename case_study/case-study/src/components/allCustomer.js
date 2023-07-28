@@ -1,4 +1,49 @@
+import { useEffect, useState } from "react"
+import { deleteCustomer, getAllCustomers } from "../services/CustomerServices";
+import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+
 export default function AllCustomer() {
+
+    const [customers, setCustomers] = useState([]);
+
+    const getAll = async () => {
+        const data = await getAllCustomers();
+        setCustomers(data);
+    }
+
+    const deleteCustomerById = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this file!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }
+        ).then((res) => {
+            if (res.isConfirmed) {
+                deleteCustomer(id).then(() => {
+                    getAllCustomers().then((data) => {
+                        setCustomers(data);
+                    }).then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Edit success fully!!!!',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                    })
+                });
+            } else if (res.dismiss === Swal.DismissReason.cancel) {
+            }
+        })
+       
+    }
+
+    useEffect(() => { getAll() }, []);
+
     return (
         <div className="container-xl">
             <div className="table-responsive">
@@ -28,76 +73,26 @@ export default function AllCustomer() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Ronaldo</td>
-                                <td>1984</td>
-                                <td>Men</td>
-                                <td>0987987789</td>
-                                <td>ronaldo@gmail.com</td>
-                                <td>Diamond</td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Messi</td>
-                                <td>1987</td>
-                                <td>Men</td>
-                                <td>0123432782</td>
-                                <td>messi@gmail.com</td>
-                                <td>Platinum</td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Eden Hazard</td>
-                                <td>1991</td>
-                                <td>Men</td>
-                                <td>0987678919</td>
-                                <td>hazard@gmail.com</td>
-                                <td>Platinum</td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Fernando Torres</td>
-                                <td>1987</td>
-                                <td>Men</td>
-                                <td>0999999999</td>
-                                <td>torres@gmail.com</td>
-                                <td>Diamond</td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Michael Ballack</td>
-                                <td>1976</td>
-                                <td>Men</td>
-                                <td>0777888999</td>
-                                <td>ballack@gmail.com</td>
-                                <td>Platinum</td>
-                                <td>
-                                    <a href="#" className="view" title="View" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                    <a href="#" className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></a>
-                                </td>
-                            </tr>
+                            {
+                                customers.map((c, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{c.name}</td>
+                                            <td>{c.date_of_birth}</td>
+                                            <td>{c.gender}</td>
+                                            <td>{c.phone_number}</td>
+                                            <td>{c.email}</td>
+                                            <td>{c.customer_type.name}</td>
+                                            <td>
+                                                <Link to={`/furama/customers/${c.id}`} className="edit" title="Edit" data-toggle="tooltip"><i className="material-icons"></i></Link>
+                                                <Link onClick={() => {deleteCustomerById(c.id)}} className="delete" title="Delete" data-toggle="tooltip"><i className="material-icons"></i></Link>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            
                         </tbody>
                     </table>
                     <div className="clearfix">
