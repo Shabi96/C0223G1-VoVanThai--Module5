@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AllSong from './components/ListSong';
 import CreateSong from './components/CreateSong';
+import EditSong from './components/EditSong';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
             <Routes>
                 <Route path='/' element={<AllSong />} />
                 <Route path='/create' element={<CreateSong />} />
+                <Route path='/edit/:id' element={<EditSong />}/>
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

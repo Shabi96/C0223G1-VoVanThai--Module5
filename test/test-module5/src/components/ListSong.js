@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { editSong, getAllSong, getSongById, searchByName } from "../services/SongService";
+import { deleteSong, getAllSong, getSongById, publicSong, searchByName } from "../services/SongService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -9,10 +9,10 @@ export default function AllSong() {
     const navigate = useNavigate();
     const [song, setSong] = useState({});
     const [page, setPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
 
     const nextPage = async () => {
-        const data = await getAllSong(page);
-        if (page < data.totalPages - 1) {
+        if (page < totalPage - 1) {
             setPage(page + 1);
         }
     }
@@ -25,6 +25,7 @@ export default function AllSong() {
 
     const getAll = async () => {
         const data = await getAllSong(page);
+        setTotalPage(data.totalPages);
         setSongLists(data.content);
     }
 
@@ -52,9 +53,9 @@ export default function AllSong() {
             reverseButtons: true
         }).then((res) => {
             if (res.isConfirmed) {
-                editSong(songSearch.id).then(() => {
-                    getAllSong().then((data) => {
-                        setSongLists(data);
+                publicSong(songSearch.id).then(() => {
+                    getAllSong(page).then((data) => {
+                        setSongLists(data.content);
                     })
                 });
                 Swal.fire({
@@ -70,13 +71,45 @@ export default function AllSong() {
     const searchSong = async () => {
         const name = document.getElementById('nameSearch').value;
         if (name == '') {
-            const data = await getAllSong();
-            setSongLists(data);
+            const data = await getAllSong(page);
+            setTotalPage(data.totalPages);
+            setSongLists(data.content);
         } else {
-            const dataSearch = await searchByName(name);
+            const dataSearch = await searchByName(name, page);
             console.log(dataSearch);
-            setSongLists(dataSearch);
+            setTotalPage(dataSearch.totalPages);
+            setSongLists(dataSearch.content);
         }
+    }
+
+    const editSongById = (id) => {
+        navigate('/edit/' + id);
+    }
+
+    const deleteById = (id, name) => {
+        console.log(id, name);
+        Swal.fire({
+            icon: 'warning',
+            title: 'Xác nhận xóa',
+            text: 'Bạn có chắc chắc muốn xóa bài hát ' + name,
+            showCancelButton: true,
+            confirmButtonText: 'Có!!!!',
+            cancelButtonText: 'Hủy',
+            reverseButtons: true
+        }).then((res) => {
+            if (res.isConfirmed) {
+                deleteSong(id).then(async () => {
+                    const data = await getAllSong(page);
+                    setSongLists(data.content);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                })
+            }
+        })
     }
 
     useEffect(() => { getAll() }, [page]);
@@ -149,6 +182,7 @@ export default function AllSong() {
                                     <th>Lượt thích</th>
                                     <th>Trạng thái</th>
                                     <th>Chức năng</th>
+                                    <th>Tùy chọn</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -160,10 +194,16 @@ export default function AllSong() {
                                                     <td>{index + 1}</td>
                                                     <td onClick={() => handleShowSong(song.id)}>{song.name}</td>
                                                     <td>{song.single}</td>
-                                                    <td>{song.artist}</td>
+                                                    <td>{song.time}</td>
                                                     <td>{song.likes}</td>
                                                     <td>Lưu trữ</td>
-                                                    <td><button className="btn btn-success" style={{ width: '100px' }} onClick={() => changStatus(song.id)}>Công khai</button></td>
+                                                    <td>
+                                                        <button className="btn btn-success" style={{ width: '100px' }} onClick={() => changStatus(song.id)}>Công khai</button>
+                                                    </td>
+                                                    <td className="d-flex">
+                                                        <button className="btn btn-success" onClick={() => editSongById(song.id)}>Sửa</button>
+                                                        <button className="btn btn-danger" onClick={() => deleteById(song.id, song.name)}>Xóa</button>
+                                                    </td>
                                                 </tr>
                                             )
                                         } else if (song.songStatus) {
@@ -172,10 +212,16 @@ export default function AllSong() {
                                                     <td>{index + 1}</td>
                                                     <td onClick={() => handleShowSong(song.id)}>{song.name}</td>
                                                     <td>{song.single}</td>
-                                                    <td>{song.artist}</td>
+                                                    <td>{song.time}</td>
                                                     <td>{song.likes}</td>
                                                     <td>Công khai</td>
-                                                    <td><button className="btn btn-success" style={{ width: '100px' }} disabled>Công khai</button></td>
+                                                    <td>
+                                                        <button className="btn btn-success" style={{ width: '100px' }} disabled>Công khai</button>
+                                                    </td>
+                                                    <td className="d-flex">
+                                                        <button className="btn btn-success" onClick={() => editSongById(song.id)}>Sửa</button>
+                                                        <button className="btn btn-danger" onClick={() => deleteById(song.id, song.name)}>Xóa</button>
+                                                    </td>
                                                 </tr>
                                             )
                                         }

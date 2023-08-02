@@ -9,7 +9,7 @@ export async function create(song) {
     await axios.post('http://localhost:8080/spotifys/', song);
 }
 
-export async function editSong(id) {
+export async function publicSong(id) {
     await axios.put('http://localhost:8080/spotifys/' + id);
 }
 
@@ -18,7 +18,15 @@ export async function getSongById(id) {
     return res.data;
 }
 
-export async function searchByName(name) {
-    const res = await axios.get('http://localhost:8080/spotifys/search/' + name);
+export async function searchByName(name, page) {
+    const res = await axios.get('http://localhost:8080/spotifys/search/' + name + '/' + page);
     return res.data;
+}
+
+export async function editSong(song) {
+    await axios.put('http://localhost:8080/spotifys/', song);
+}
+
+export async function deleteSong(id) {
+    await axios.delete('http://localhost:8080/spotifys/' + id);
 }

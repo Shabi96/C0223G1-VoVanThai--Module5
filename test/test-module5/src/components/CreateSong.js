@@ -50,7 +50,7 @@ export default function CreateSong() {
                 <div className="table-title">
                     <div class="row">
                         <div className="col-sm-6">
-                            <h2>Quản lý <b>bài hát</b></h2>
+                            <h2>Thêm mới <b>bài hát</b></h2>
                         </div>
 
                     </div>
@@ -59,12 +59,12 @@ export default function CreateSong() {
             <Formik initialValues={{
                 name: '', single: '', artist: '', time: '', likes: '', songStatus: ''
             }}
-                // validationSchema={yup.object({
-                //     name: yup.string().required('Không được để trống trường này!!!!'),
-                //     single: yup.string().required('Không được để trống trường này!!!!').min(3, 'Tên tối thiểu là 3 kí tự!!!!').max(30, 'Tên tối đa là 30 kí tự!!!!'),
-                //     artist: yup.string().required('Không được để trống trường này!!!!').min(3, 'Tên tối thiểu là 3 kí tự!!!!').max(30, 'Tên tối đa là 30 kí tự!!!!'),
-                //     time: yup.string().required('Không được để trống trường này!!!!')
-                // })}
+                validationSchema={yup.object({
+                    name: yup.string().required('Không được để trống trường này!!!!'),
+                    single: yup.string().required('Không được để trống trường này!!!!').min(3, 'Tên tối thiểu là 3 kí tự!!!!').max(30, 'Tên tối đa là 30 kí tự!!!!'),
+                    artist: yup.string().required('Không được để trống trường này!!!!').min(3, 'Tên tối thiểu là 3 kí tự!!!!').max(30, 'Tên tối đa là 30 kí tự!!!!'),
+                    time: yup.string().required('Không được để trống trường này!!!!').matches(`^[0-5][0-9]:[0-5][0-9]$`, 'Sai định dạng mm:ss')
+                })}
                 onSubmit={(values) => {
                     console.log(values);
                     create({ ...values, likes: 0, status: false }).then(() => {
